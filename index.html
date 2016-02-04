@@ -1,79 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Javascript CRUD</title>
-    
-    <!-- Bootstrap minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <title>Javascript CRUD</title>
+  
+  <!-- Bootstrap minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body>
 
-    <div class="container">
-        <h1>Javascript CRUD</h1>
-        <p>The ideia is control all the information flow in javascript, using only Bootstrap and Jquery</p>
+  <div class="container">
+    <h1>Javascript CRUD</h1>
+    <p>The ideia is control all the information flow in javascript, using only Bootstrap and Jquery</p>
 
-        <hr>
+    <hr>
 
-        <button type="button" class="btn btn-primary" id="btn_open_add_person_modal">Add Person</button>
+    <button type="button" class="btn btn-primary js-open-add-person-modal">Add Person</button>
 
-        <br>
-        <br>
+    <br>
+    <br>
 
-        <table class="table table-bordered table-hover table-condensed">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Options</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-            <tfoot>
-            </tfoot>
-        </table>
-    </div>
+    <table id="people_table" class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4">..</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
 
-    <div class="modal fade" id="modal_add_person" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Add Person</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="horizontal-form">
-                        <div class="form-group">
-                            <label for="name"></label>
-                            <div class="form-control col-md-4">
-                                <input type="text" class="form-control input-xs" name="name" id="name">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="age"></label>
-                            <div class="form-control col-md-1">
-                                <input type="text" class="form-control input-xs" name="age" id="age">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
+  <div class="modal fade" id="modal_add_person" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Add Person</h4>
         </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="name" class="col-md-2 control-label">Name</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control input-xs" name="name" id="name">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="age" class="col-md-2 control-label">Age</label>
+              <div class="col-md-2">
+                <input type="text" class="form-control input-xs" name="age" id="age">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary js-add-person">Save changes</button>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- JQuery minified JavaScript -->
-    <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
-    <!-- Bootstrap minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    
-    <!-- Custom CSS -->
-    <script type="text/javascript" src="js/database.json"></script>
-    <script type="text/javascript" src="js/person.js"></script>
+  <!-- JQuery minified JavaScript -->
+  <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+  <!-- Bootstrap minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  
+  <!-- Custom CSS -->
+  <script type="text/javascript" src="js/database.json"></script>
+  <script type="text/javascript" src="js/person.js"></script>
 </body>
 </html>

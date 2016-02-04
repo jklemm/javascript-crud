@@ -1,0 +1,21 @@
+{
+    "extends": "eslint:recommended",
+    "rules": {
+        "semi": [2, "never"],
+        "no-spaced-func": 2,
+        "camelcase": [2, {"properties": "always"}],
+        "space-in-parens": [2, "never"],
+        "quote-props": [2, "as-needed"],
+        "strict": [2, "global"],
+        "eqeqeq": 2,
+        "no-magic-numbers": [2, {"ignore": [-1, 0, 1, 2]}],
+        "no-alert": 2,
+        "no-unused-vars": 0,
+        "no-undef": 0
+    },
+    "env": {
+        "browser": true,
+        "jquery": true,
+        "node": true
+    }
+}

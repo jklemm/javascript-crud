@@ -20,10 +20,10 @@ var Person = (function() {
             openAddPersonModal()
         })
 
-        $('.js-add-person').click(function() {
-            var name = $('#name').val()
-            var age = $('#age').val()
-            addPerson(name, age)
+        $(document).on('click', '.js-add-person', function() {
+            var person_name = $('#person_name').val()
+            var person_age = $('#person_age').val()
+            addPerson(person_name, person_age)
             closeAddPersonModal()
             refreshHtmlTable()
             cleanFieldsPersonModal()
@@ -31,7 +31,7 @@ var Person = (function() {
 
         $(document).on('click', '.js-edit-person', function() {
             var id = $(this).data('id')
-            openAddPersonModal()
+            openEditPersonModal()
         })
 
         $(document).on('click', '.js-delete-person', function() {
@@ -43,6 +43,15 @@ var Person = (function() {
 
     function openAddPersonModal()
     {
+        $('#modal_add_person .modal-title').html('Add Person')
+        $('#modal_add_person .modal-action').removeClass('js-edit-person').addClass('js-add-person')
+        $('#modal_add_person').modal('show')
+    }
+
+    function openEditPersonModal()
+    {
+        $('#modal_add_person .modal-title').html('Edit Person')
+        $('#modal_add_person .modal-action').removeClass('js-add-person').addClass('js-edit-person')
         $('#modal_add_person').modal('show')
     }
 
@@ -67,9 +76,21 @@ var Person = (function() {
         list_people.push(newPerson)
     }
 
-    function editPerson(id)
+    function editPerson(id, name, age)
     {
-        list_people.forEach()
+        debugger
+        for(var i = 0; i < list_people.length; i++)
+        {
+            if(list_people[i].id == id)
+            {
+                list_people[i] = {
+                    id: id,
+                    name: name,
+                    age: age
+                }
+                break
+            }
+        }
     }
     
     function deletePerson(id)
@@ -96,15 +117,19 @@ var Person = (function() {
             var $td_name = $('<td />').html(person.name)
             var $td_age = $('<td />').html(person.age)
 
-            var $btn_edit = $('<button />',
-                {type: "button", class: "btn btn-xs btn-warning js-edit-person", 'data-id': person.id})
-                .html('Edit')
+            var $btn_edit = $('<button />', {
+                'type': 'button',
+                'class': 'btn btn-xs btn-warning js-edit-person',
+                'data-id': person.id
+            }).html('<span class="glyphicon glyphicon-pencil"></span>&nbsp; Edit')
 
-            var $btn_delete = $('<button />',
-                {type: "button", class: "btn btn-xs btn-danger js-delete-person", 'data-id': person.id})
-                .html('Delete')
+            var $btn_delete = $('<button />', {
+                'type': 'button',
+                'class': 'btn btn-xs btn-danger js-delete-person',
+                'data-id': person.id
+            }).html('<span class="glyphicon glyphicon-trash"></span>&nbsp; Delete')
 
-            var $td_options = $('<td />').append($btn_edit, $btn_delete)
+            var $td_options = $('<td />').append($btn_edit, ' ', $btn_delete)
 
             var $tr = $('<tr />').append($td_id, $td_name, $td_age, $td_options)
 

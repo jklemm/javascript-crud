@@ -15,7 +15,9 @@
 
     <hr>
 
-    <button type="button" class="btn btn-primary js-open-add-person-modal">Add Person</button>
+    <button type="button" class="btn btn-primary js-open-add-person-modal">
+      <span class="glyphicon glyphicon-plus"></span>&nbsp; Add Person
+    </button>
 
     <br>
     <br>
@@ -44,27 +46,28 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Add Person</h4>
+          <h4 class="modal-title">Modal title</h4>
         </div>
         <div class="modal-body">
           <form class="form-horizontal">
+            <input type="hidden" name="person_id" id="person_id">
             <div class="form-group">
               <label for="name" class="col-md-2 control-label">Name</label>
               <div class="col-md-6">
-                <input type="text" class="form-control input-xs" name="name" id="name">
+                <input type="text" class="form-control input-xs" name="person_name" id="person_name">
               </div>
             </div>
             <div class="form-group">
               <label for="age" class="col-md-2 control-label">Age</label>
               <div class="col-md-2">
-                <input type="text" class="form-control input-xs" name="age" id="age">
+                <input type="text" class="form-control input-xs" name="person_age" id="person_age">
               </div>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary js-add-person">Save changes</button>
+          <button type="button" class="btn btn-primary modal-action">Save changes</button>
         </div>
       </div>
     </div>

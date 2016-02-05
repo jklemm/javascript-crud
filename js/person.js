@@ -29,12 +29,12 @@ var Person = (function() {
             cleanFieldsPersonModal()
         })
 
-        $(document).on('click', '.js-edit-person', function() {
+        $(document).on('click', '.js-open-edit-person-modal', function() {
             var id = $(this).data('id')
             openEditPersonModal()
         })
 
-        $(document).on('click', '.js-delete-person', function() {
+        $(document).on('click', '.js-open-delete-person-modal', function() {
             var id = $(this).data('id')
             deletePerson(id)
             refreshHtmlTable()
@@ -119,13 +119,13 @@ var Person = (function() {
 
             var $btn_edit = $('<button />', {
                 'type': 'button',
-                'class': 'btn btn-xs btn-warning js-edit-person',
+                'class': 'btn btn-xs btn-warning js-open-edit-person-modal',
                 'data-id': person.id
             }).html('<span class="glyphicon glyphicon-pencil"></span>&nbsp; Edit')
 
             var $btn_delete = $('<button />', {
                 'type': 'button',
-                'class': 'btn btn-xs btn-danger js-delete-person',
+                'class': 'btn btn-xs btn-danger js-open-delete-person-modal',
                 'data-id': person.id
             }).html('<span class="glyphicon glyphicon-trash"></span>&nbsp; Delete')
 

@@ -2,6 +2,7 @@
 
 var Person = (function() {
 
+    var increment = 0
     var list_people = []
     var $modal_add_person = $('#modal_add_person')
 
@@ -68,7 +69,7 @@ var Person = (function() {
 
     function addPerson(name, age)
     {
-        var newId = list_people.length + 1
+        increment++
         var newPerson = {
             id: newId,
             name: name,

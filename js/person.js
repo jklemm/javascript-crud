@@ -3,6 +3,7 @@
 var Person = (function() {
 
     var list_people = []
+    var $modal_add_person = $('#modal_add_person')
 
     function init()
     {
@@ -43,26 +44,26 @@ var Person = (function() {
 
     function openAddPersonModal()
     {
-        $('#modal_add_person .modal-title').html('Add Person')
-        $('#modal_add_person .modal-action').removeClass('js-edit-person').addClass('js-add-person')
-        $('#modal_add_person').modal('show')
+        $modal_add_person.find('.modal-title').html('Add Person')
+        $modal_add_person.find('.modal-action').removeClass('js-edit-person').addClass('js-add-person')
+        $modal_add_person.modal('show')
     }
 
     function openEditPersonModal()
     {
-        $('#modal_add_person .modal-title').html('Edit Person')
-        $('#modal_add_person .modal-action').removeClass('js-add-person').addClass('js-edit-person')
-        $('#modal_add_person').modal('show')
+        $modal_add_person.find('.modal-title').html('Edit Person')
+        $modal_add_person.find('.modal-action').removeClass('js-add-person').addClass('js-edit-person')
+        $modal_add_person.modal('show')
     }
 
     function closeAddPersonModal()
     {
-        $('#modal_add_person').modal('hide')
+        $modal_add_person.modal('hide')
     }
 
     function cleanFieldsPersonModal()
     {
-        $('#modal_add_person input').val('')
+        $modal_add_person.find('input').val('')
     }
 
     function addPerson(name, age)
@@ -78,7 +79,6 @@ var Person = (function() {
 
     function editPerson(id, name, age)
     {
-        debugger
         for(var i = 0; i < list_people.length; i++)
         {
             if(list_people[i].id == id)
@@ -107,33 +107,32 @@ var Person = (function() {
 
     function refreshHtmlTable()
     {
-        console.log('entrei');
-        var $people_table = $('#people_table tbody')
+        var $table_content = $('#people_table').find('tbody')
         
-        $('#people_table tbody').html('')
+        $table_content.html('')
 
         list_people.forEach(function(person) {
-            var $td_id = $('<td />').html(person.id)
-            var $td_name = $('<td />').html(person.name)
-            var $td_age = $('<td />').html(person.age)
+            var $td_id = $('<td></td>').html(person.id)
+            var $td_name = $('<td></td>').html(person.name)
+            var $td_age = $('<td></td>').html(person.age)
 
-            var $btn_edit = $('<button />', {
+            var $btn_edit = $('<button></button>', {
                 'type': 'button',
                 'class': 'btn btn-xs btn-warning js-open-edit-person-modal',
                 'data-id': person.id
             }).html('<span class="glyphicon glyphicon-pencil"></span>&nbsp; Edit')
 
-            var $btn_delete = $('<button />', {
+            var $btn_delete = $('<button></button>', {
                 'type': 'button',
                 'class': 'btn btn-xs btn-danger js-open-delete-person-modal',
                 'data-id': person.id
             }).html('<span class="glyphicon glyphicon-trash"></span>&nbsp; Delete')
 
-            var $td_options = $('<td />').append($btn_edit, ' ', $btn_delete)
+            var $td_options = $('<td></td>').append($btn_edit, ' ', $btn_delete)
 
-            var $tr = $('<tr />').append($td_id, $td_name, $td_age, $td_options)
+            var $tr = $('<tr></tr>').append($td_id, $td_name, $td_age, $td_options)
 
-            $people_table.append($tr)
+            $table_content.append($tr)
         })
     }
 

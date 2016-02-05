@@ -4,7 +4,7 @@ var Person = (function() {
 
     var increment = 0
     var list_people = []
-    var $modal_add_person = $('#modal_add_person')
+    var $modal_person = $('#modal_person')
 
     function init()
     {
@@ -26,14 +26,25 @@ var Person = (function() {
             var person_name = $('#person_name').val()
             var person_age = $('#person_age').val()
             addPerson(person_name, person_age)
-            closeAddPersonModal()
             refreshHtmlTable()
+            closePersonModal()
+            cleanFieldsPersonModal()
+        })
+
+        $(document).on('click', '.js-edit-person', function() {
+            var person_id = $('#person_id').val()
+            var person_name = $('#person_name').val()
+            var person_age = $('#person_age').val()
+            editPerson(person_id, person_name, person_age)
+            refreshHtmlTable()
+            closePersonModal()
             cleanFieldsPersonModal()
         })
 
         $(document).on('click', '.js-open-edit-person-modal', function() {
             var id = $(this).data('id')
-            openEditPersonModal()
+            var person = getPerson(id)
+            openEditPersonModal(person)
         })
 
         $(document).on('click', '.js-open-delete-person-modal', function() {
@@ -45,37 +56,53 @@ var Person = (function() {
 
     function openAddPersonModal()
     {
-        $modal_add_person.find('.modal-title').html('Add Person')
-        $modal_add_person.find('.modal-action').removeClass('js-edit-person').addClass('js-add-person')
-        $modal_add_person.modal('show')
+        $modal_person.find('.modal-title').html('Add Person')
+        $modal_person.find('.modal-action').removeClass('js-edit-person').addClass('js-add-person')
+        $modal_person.modal('show')
     }
 
-    function openEditPersonModal()
+    function openEditPersonModal(person)
     {
-        $modal_add_person.find('.modal-title').html('Edit Person')
-        $modal_add_person.find('.modal-action').removeClass('js-add-person').addClass('js-edit-person')
-        $modal_add_person.modal('show')
+        $modal_person.find('.modal-title').html('Edit Person')
+        $modal_person.find('.modal-action').removeClass('js-add-person').addClass('js-edit-person')
+
+        $('#person_id').val(person.id)
+        $('#person_name').val(person.name)
+        $('#person_age').val(person.age)
+
+        $modal_person.modal('show')
     }
 
-    function closeAddPersonModal()
+    function closePersonModal()
     {
-        $modal_add_person.modal('hide')
+        $modal_person.modal('hide')
     }
 
     function cleanFieldsPersonModal()
     {
-        $modal_add_person.find('input').val('')
+        $modal_person.find('input').val('')
     }
 
     function addPerson(name, age)
     {
         increment++
         var newPerson = {
-            id: newId,
+            id: increment,
             name: name,
             age: age
         }
         list_people.push(newPerson)
+    }
+
+    function getPerson(id)
+    {
+        for(var i = 0; i < list_people.length; i++)
+        {
+            if(list_people[i].id == id)
+            {
+                return list_people[i]
+            }
+        }
     }
 
     function editPerson(id, name, age)
@@ -93,7 +120,7 @@ var Person = (function() {
             }
         }
     }
-    
+
     function deletePerson(id)
     {
         for(var i = 0; i < list_people.length; i++)

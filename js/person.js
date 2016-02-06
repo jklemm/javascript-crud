@@ -1,18 +1,84 @@
 'use strict'
 
-var Person = (function() {
-
+var PeopleDatabase = (function(){
     var increment = 0
-    var list_people = []
+    var listPeople = []
+
+    function getPerson(id)
+    {
+        for(var i = 0; i < listPeople.length; i++)
+        {
+            if(listPeople[i].id == id)
+            {
+                return listPeople[i]
+            }
+        }
+    }
+
+    function addPerson(name, age)
+    {
+        increment++
+        var newPerson = {
+            id: increment,
+            name: name,
+            age: age
+        }
+        listPeople.push(newPerson)
+    }
+
+    function editPerson(id, name, age)
+    {
+        for(var i = 0; i < listPeople.length; i++)
+        {
+            if(listPeople[i].id == id)
+            {
+                listPeople[i] = {
+                    id: id,
+                    name: name,
+                    age: age
+                }
+                break
+            }
+        }
+    }
+
+    function deletePerson(id)
+    {
+        for(var i = 0; i < listPeople.length; i++)
+        {
+            if(listPeople[i].id == id)
+            {
+                listPeople.splice(i, 1)
+                break
+            }
+        }
+    }
+
+    function listAllPeople()
+    {
+        return listPeople
+    }
+
+    return {
+        get: getPerson,
+        add: addPerson,
+        edit: editPerson,
+        delete: deletePerson,
+        list: listAllPeople,
+    }
+})()
+
+var Person = (function(){
+
+    var peopleDatabase = undefined
     var $modal_person = $('#modal_person')
 
-    function init()
+    function init(database)
     {
         bindings()
-        addPerson("Jorge", 29)
-        addPerson("Ivonete", 27)
-        addPerson("Marizete", 32)
-        addPerson("Maikon", 27)
+        peopleDatabase = database
+        peopleDatabase.add("Jorge", 29)
+        peopleDatabase.add("Ivonete", 27)
         refreshHtmlTable()
     }
 
@@ -25,7 +91,7 @@ var Person = (function() {
         $(document).on('click', '.js-add-person', function() {
             var person_name = $('#person_name').val()
             var person_age = $('#person_age').val()
-            addPerson(person_name, person_age)
+            peopleDatabase.add(person_name, person_age)
             refreshHtmlTable()
             closePersonModal()
             cleanFieldsPersonModal()
@@ -35,7 +101,7 @@ var Person = (function() {
             var person_id = $('#person_id').val()
             var person_name = $('#person_name').val()
             var person_age = $('#person_age').val()
-            editPerson(person_id, person_name, person_age)
+            peopleDatabase.edit(person_id, person_name, person_age)
             refreshHtmlTable()
             closePersonModal()
             cleanFieldsPersonModal()
@@ -43,13 +109,13 @@ var Person = (function() {
 
         $(document).on('click', '.js-open-edit-person-modal', function() {
             var id = $(this).data('id')
-            var person = getPerson(id)
+            var person = peopleDatabase.get(id)
             openEditPersonModal(person)
         })
 
         $(document).on('click', '.js-open-delete-person-modal', function() {
             var id = $(this).data('id')
-            deletePerson(id)
+            peopleDatabase.delete(id)
             refreshHtmlTable()
         })
     }
@@ -83,63 +149,15 @@ var Person = (function() {
         $modal_person.find('input').val('')
     }
 
-    function addPerson(name, age)
-    {
-        increment++
-        var newPerson = {
-            id: increment,
-            name: name,
-            age: age
-        }
-        list_people.push(newPerson)
-    }
-
-    function getPerson(id)
-    {
-        for(var i = 0; i < list_people.length; i++)
-        {
-            if(list_people[i].id == id)
-            {
-                return list_people[i]
-            }
-        }
-    }
-
-    function editPerson(id, name, age)
-    {
-        for(var i = 0; i < list_people.length; i++)
-        {
-            if(list_people[i].id == id)
-            {
-                list_people[i] = {
-                    id: id,
-                    name: name,
-                    age: age
-                }
-                break
-            }
-        }
-    }
-
-    function deletePerson(id)
-    {
-        for(var i = 0; i < list_people.length; i++)
-        {
-            if(list_people[i].id == id)
-            {
-                list_people.splice(i, 1)
-                break
-            }
-        }
-    }
-
     function refreshHtmlTable()
     {
         var $table_content = $('#people_table').find('tbody')
         
         $table_content.html('')
 
-        list_people.forEach(function(person) {
+        var people = peopleDatabase.list()
+
+        people.forEach(function(person) {
             var $td_id = $('<td></td>').html(person.id)
             var $td_name = $('<td></td>').html(person.name)
             var $td_age = $('<td></td>').html(person.age)
@@ -170,4 +188,4 @@ var Person = (function() {
 
 })()
 
-Person.init()
+Person.init(PeopleDatabase)

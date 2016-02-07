@@ -39,6 +39,34 @@
         </tr>
       </tfoot>
     </table>
+
+    <hr>
+
+    <form class="form-horizontal" action="#">
+      <div class="form-group">
+        <label for="input_person_id" class="col-md-2 control-label">Search a person by ID</label>
+        <div class="input-group col-md-4">
+          <input type="text" class="form-control" id="input_person_id">
+          <span class="input-group-btn">
+            <button class="btn btn-default js-search-person" type="button">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="text_person_name" class="col-md-2 control-label">Name</label>
+        <div class="col-md-4">
+          <p class="form-control-static input-xs" id="text_person_name">.</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="text_person_age" class="col-md-2 control-label">Age</label>
+        <div class="col-md-2">
+          <p class="form-control-static input-xs" id="text_person_age">.</p>
+        </div>
+      </div>
+    </form>
   </div>
 
   <div class="modal fade" id="modal_person" tabindex="-1" role="dialog">

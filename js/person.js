@@ -72,13 +72,17 @@ var Person = (function(){
 
     var peopleDatabase = undefined
     var $modal_person = $('#modal_person')
+    var $modal_person_id = $('#modal_person_id')
+    var $modal_person_name = $('#modal_person_name')
+    var $modal_person_age = $('#modal_person_age')
 
     function init(database)
     {
         bindings()
         peopleDatabase = database
-        peopleDatabase.add("Jorge", 29)
-        peopleDatabase.add("Ivonete", 27)
+        peopleDatabase.add("Fulano", 29)
+        peopleDatabase.add("Ciclano", 27)
+        peopleDatabase.add("Beltrano", 23)
         refreshHtmlTable()
     }
 
@@ -89,8 +93,8 @@ var Person = (function(){
         })
 
         $(document).on('click', '.js-add-person', function() {
-            var person_name = $('#person_name').val()
-            var person_age = $('#person_age').val()
+            var person_name = $modal_person_name.val()
+            var person_age = $modal_person_age.val()
             peopleDatabase.add(person_name, person_age)
             refreshHtmlTable()
             closePersonModal()
@@ -98,9 +102,9 @@ var Person = (function(){
         })
 
         $(document).on('click', '.js-edit-person', function() {
-            var person_id = $('#person_id').val()
-            var person_name = $('#person_name').val()
-            var person_age = $('#person_age').val()
+            var person_id = $modal_person_id.val()
+            var person_name = $modal_person_name.val()
+            var person_age = $modal_person_age.val()
             peopleDatabase.edit(person_id, person_name, person_age)
             refreshHtmlTable()
             closePersonModal()
@@ -132,9 +136,9 @@ var Person = (function(){
         $modal_person.find('.modal-title').html('Edit Person')
         $modal_person.find('.modal-action').removeClass('js-add-person').addClass('js-edit-person')
 
-        $('#person_id').val(person.id)
-        $('#person_name').val(person.name)
-        $('#person_age').val(person.age)
+        $modal_person_id.val(person.id)
+        $modal_person_name.val(person.name)
+        $modal_person_age.val(person.age)
 
         $modal_person.modal('show')
     }

@@ -111,12 +111,14 @@ var Person = (function(){
             cleanFieldsPersonModal()
         })
 
-        $(document).on('click', '.js-search-person', function(event) {
-            var person_id = $('#input_person_id').val()
-            var person = peopleDatabase.get(person_id)
-
-            $('#text_person_name').html(person.name)
-            $('#text_person_age').html(person.age)
+        $(document).on('keypress', '.js-search-person', function(event) {
+            if(event.which == 13) // 13 is enter key
+            {
+                var person_id = $('#input_person_id').val()
+                var person = peopleDatabase.get(person_id)
+                $('#text_person_name').html(person.name)
+                $('#text_person_age').html(person.age)
+            }
         })
 
         $(document).on('click', '.js-open-edit-person-modal', function() {

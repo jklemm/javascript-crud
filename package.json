@@ -1,0 +1,33 @@
+{
+  "name": "javascript-crud",
+  "version": "0.1.0",
+  "description": "Simple CRUD using javascript and bootstrap",
+  "main": "index.html",
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jklemm/javascript-crud.git"
+  },
+  "keywords": [
+    "javascript",
+    "crud",
+    "jquery",
+    "bootstrap",
+    "revealing",
+    "module",
+    "pattern"
+  ],
+  "author": "Jorge Augusto Klemm",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jklemm/javascript-crud/issues"
+  },
+  "homepage": "https://github.com/jklemm/javascript-crud#readme"
+}

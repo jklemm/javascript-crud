@@ -1,88 +1,20 @@
 'use strict'
 
-var PeopleDatabase = (function(){
-    var increment = 0
-    var listPeople = []
-
-    function getPerson(id)
-    {
-        for(var i = 0; i < listPeople.length; i++)
-        {
-            if(listPeople[i].id == id)
-            {
-                return listPeople[i]
-            }
-        }
-    }
-
-    function addPerson(name, age)
-    {
-        increment++
-        var newPerson = {
-            id: increment,
-            name: name,
-            age: age
-        }
-        listPeople.push(newPerson)
-    }
-
-    function editPerson(id, name, age)
-    {
-        for(var i = 0; i < listPeople.length; i++)
-        {
-            if(listPeople[i].id == id)
-            {
-                listPeople[i] = {
-                    id: id,
-                    name: name,
-                    age: age
-                }
-                break
-            }
-        }
-    }
-
-    function deletePerson(id)
-    {
-        for(var i = 0; i < listPeople.length; i++)
-        {
-            if(listPeople[i].id == id)
-            {
-                listPeople.splice(i, 1)
-                break
-            }
-        }
-    }
-
-    function listAllPeople()
-    {
-        return listPeople
-    }
-
-    return {
-        get: getPerson,
-        add: addPerson,
-        edit: editPerson,
-        delete: deletePerson,
-        list: listAllPeople,
-    }
-})()
-
 var Person = (function(){
 
-    var peopleDatabase = undefined
+    var datastore = undefined
     var $modal_person = $('#modal_person')
     var $modal_person_id = $('#modal_person_id')
     var $modal_person_name = $('#modal_person_name')
     var $modal_person_age = $('#modal_person_age')
 
-    function init(database)
+    function init(Datastore)
     {
         bindings()
-        peopleDatabase = database
-        peopleDatabase.add("Fulano", 29)
-        peopleDatabase.add("Ciclano", 27)
-        peopleDatabase.add("Beltrano", 23)
+        datastore = Datastore
+        datastore.add("Fulano", 29)
+        datastore.add("Ciclano", 27)
+        datastore.add("Beltrano", 23)
         refreshHtmlTable()
     }
 
@@ -95,7 +27,7 @@ var Person = (function(){
         $(document).on('click', '.js-add-person', function() {
             var person_name = $modal_person_name.val()
             var person_age = $modal_person_age.val()
-            peopleDatabase.add(person_name, person_age)
+            datastore.add(person_name, person_age)
             refreshHtmlTable()
             closePersonModal()
             cleanFieldsPersonModal()
@@ -105,7 +37,7 @@ var Person = (function(){
             var person_id = $modal_person_id.val()
             var person_name = $modal_person_name.val()
             var person_age = $modal_person_age.val()
-            peopleDatabase.edit(person_id, person_name, person_age)
+            datastore.edit(person_id, person_name, person_age)
             refreshHtmlTable()
             closePersonModal()
             cleanFieldsPersonModal()
@@ -115,7 +47,7 @@ var Person = (function(){
             if(event.which == 13) // 13 is enter key
             {
                 var person_id = $('#input_person_id').val()
-                var person = peopleDatabase.get(person_id)
+                var person = datastore.get(person_id)
                 $('#text_person_name').html(person.name)
                 $('#text_person_age').html(person.age)
             }
@@ -123,13 +55,13 @@ var Person = (function(){
 
         $(document).on('click', '.js-open-edit-person-modal', function() {
             var id = $(this).data('id')
-            var person = peopleDatabase.get(id)
+            var person = datastore.get(id)
             openEditPersonModal(person)
         })
 
         $(document).on('click', '.js-open-delete-person-modal', function() {
             var id = $(this).data('id')
-            peopleDatabase.delete(id)
+            datastore.delete(id)
             refreshHtmlTable()
         })
     }
@@ -169,7 +101,7 @@ var Person = (function(){
         
         $table_content.html('')
 
-        var people = peopleDatabase.list()
+        var people = datastore.list()
 
         people.forEach(function(person) {
             var $td_id = $('<td></td>').html(person.id)
@@ -202,4 +134,4 @@ var Person = (function(){
 
 })()
 
-Person.init(PeopleDatabase)
+Person.init(Datastore)

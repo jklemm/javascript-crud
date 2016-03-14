@@ -29,3 +29,13 @@ crashlytics-build.properties
 fabric.properties
 
 node_modules
+
+.idea/inspectionProfiles/profiles_settings.xml
+
+.idea/jsLibraryMappings.xml
+
+.idea/inspectionProfiles/Project_Default.xml
+
+.idea/libraries/javascript_crud_node_modules.xml
+
+.idea/vcs.xml
